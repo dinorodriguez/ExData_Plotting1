@@ -1,0 +1,6 @@
+library(sqldf)
+gap <- read.csv.sql("../Documents/household_power_consumption.txt", sql = "select Date, Time, Global_active_power from file where Date = '1/2/2007' or Date = '2/2/2007'", header = TRUE, sep = ";")
+x_axis <- with(gap, strptime(paste(as.Date(Date,"%d/%m/%Y"),Time),"%Y-%m-%d %H:%M:%S"))
+png("plot2.png", width = 480, height = 480)
+plot(x_axis, gap$Global_active_power, type = "l", ylab = "Global Active Power (kilowatts)", xlab = "")
+dev.off()
